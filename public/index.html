@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MockAPI - Personal Mock API Platform</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔌</text></svg>">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <span class="logo-icon">🔌</span>
+          <span class="logo-text">MockAPI</span>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-section="dashboard">
+          <span class="nav-icon">📊</span>
+          <span class="nav-label">Dashboard</span>
+        </a>
+        <a href="#" class="nav-item" data-section="create">
+          <span class="nav-icon">➕</span>
+          <span class="nav-label">Create Mock</span>
+        </a>
+        <a href="#" class="nav-item" data-section="logs">
+          <span class="nav-icon">📋</span>
+          <span class="nav-label">Request Logs</span>
+        </a>
+        <a href="#" class="nav-item" data-section="import-export">
+          <span class="nav-icon">📦</span>
+          <span class="nav-label">Import / Export</span>
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="theme-toggle" id="themeToggle">
+          <span class="nav-icon">🌙</span>
+          <span class="nav-label">Dark Mode</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="main-header">
+        <div class="header-left">
+          <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+          <h1 class="page-title" id="pageTitle">Dashboard</h1>
+        </div>
+        <div class="header-right">
+          <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search mocks..." class="search-input">
+            <span class="search-icon">🔍</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard Section -->
+      <section class="content-section active" id="dashboardSection">
+        <div class="dashboard-stats">
+          <div class="stat-card">
+            <div class="stat-value" id="totalMocks">0</div>
+            <div class="stat-label">Total Mocks</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="activeMocks">0</div>
+            <div class="stat-label">Active</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="disabledMocks">0</div>
+            <div class="stat-label">Disabled</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="totalRequests">0</div>
+            <div class="stat-label">Total Requests</div>
+          </div>
+        </div>
+        <div class="section-header">
+          <h2>Mock APIs</h2>
+          <button class="btn btn-primary" id="createMockBtn">+ Create Mock</button>
+        </div>
+        <div class="table-container">
+          <table class="mocks-table" id="mocksTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Method</th>
+                <th>Path</th>
+                <th>Status</th>
+                <th>Enabled</th>
+                <th>Created</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="mocksTableBody"></tbody>
+          </table>
+          <div class="empty-state" id="emptyState">
+            <div class="empty-icon">📭</div>
+            <h3>No mock APIs yet</h3>
+            <p>Create your first mock API to get started</p>
+            <button class="btn btn-primary" id="emptyCreateBtn">+ Create Mock</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Create/Edit Section -->
+      <section class="content-section" id="createSection">
+        <div class="section-header">
+          <h2 id="formTitle">Create Mock API</h2>
+        </div>
+        <form class="mock-form" id="mockForm">
+          <input type="hidden" id="mockId">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="mockName">Name *</label>
+              <input type="text" id="mockName" placeholder="e.g., Get Users" required>
+            </div>
+            <div class="form-group">
+              <label for="mockDescription">Description</label>
+              <input type="text" id="mockDescription" placeholder="e.g., Returns list of users">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="mockMethod">HTTP Method *</label>
+              <select id="mockMethod" required>
+                <option value="GET">GET</option>
+                <option value="POST">POST</option>
+                <option value="PUT">PUT</option>
+                <option value="PATCH">PATCH</option>
+                <option value="DELETE">DELETE</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="mockPath">Path *</label>
+              <input type="text" id="mockPath" placeholder="e.g., /users/:id" required>
+            </div>
+          </div>
+          <div class="form-row form-row-3">
+            <div class="form-group">
+              <label for="mockStatus">Status Code *</label>
+              <input type="number" id="mockStatus" value="200" min="100" max="599" required>
+            </div>
+            <div class="form-group">
+              <label for="mockDelay">Response Delay (ms)</label>
+              <input type="number" id="mockDelay" value="0" min="0" max="30000">
+            </div>
+            <div class="form-group">
+              <label for="mockResponseType">Response Type</label>
+              <select id="mockResponseType">
+                <option value="JSON">JSON</option>
+                <option value="TEXT">TEXT</option>
+                <option value="HTML">HTML</option>
+                <option value="XML">XML</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Response Headers</label>
+            <div class="headers-container" id="headersContainer">
+              <div class="header-row">
+                <input type="text" placeholder="Header name" class="header-key" value="Content-Type">
+                <input type="text" placeholder="Header value" class="header-value" value="application/json">
+                <button type="button" class="btn-icon btn-remove-header">✕</button>
+              </div>
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" id="addHeaderBtn">+ Add Header</button>
+          </div>
+          <div class="form-group">
+            <label for="mockBody">Response Body</label>
+            <div class="editor-toolbar">
+              <button type="button" class="btn btn-secondary btn-sm" id="formatJsonBtn">Format JSON</button>
+              <span class="editor-hint">Supports: {{timestamp}}, {{uuid}}, {{randomInt}}, {{randomString}}, {{paramName}}</span>
+            </div>
+            <textarea id="mockBody" rows="12" placeholder='{"message": "Hello World"}'></textarea>
+            <div class="json-error" id="jsonError"></div>
+          </div>
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="mockEnabled" checked>
+              <span>Enabled</span>
+            </label>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" id="cancelFormBtn">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="saveFormBtn">Save Mock</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Logs Section -->
+      <section class="content-section" id="logsSection">
+        <div class="section-header">
+          <h2>Request Logs</h2>
+          <button class="btn btn-danger" id="clearLogsBtn">Clear Logs</button>
+        </div>
+        <div class="table-container">
+          <table class="logs-table" id="logsTable">
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>Method</th>
+                <th>Path</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="logsTableBody"></tbody>
+          </table>
+          <div class="empty-state" id="emptyLogs">
+            <div class="empty-icon">📋</div>
+            <h3>No request logs</h3>
+            <p>Logs will appear here when your mock APIs receive requests</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Import/Export Section -->
+      <section class="content-section" id="importExportSection">
+        <div class="section-header">
+          <h2>Import / Export</h2>
+        </div>
+        <div class="import-export-container">
+          <div class="ie-card">
+            <h3>📤 Export Mocks</h3>
+            <p>Download all your mock configurations as a JSON file.</p>
+            <button class="btn btn-primary" id="exportBtn">Export mocks.json</button>
+          </div>
+          <div class="ie-card">
+            <h3>📥 Import Mocks</h3>
+            <p>Upload a mocks.json file to import mock configurations.</p>
+            <input type="file" id="importFile" accept=".json" hidden>
+            <button class="btn btn-primary" id="importBtn">Import mocks.json</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Test Modal -->
+  <div class="modal-overlay" id="testModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Test Endpoint</h3>
+        <button class="modal-close" id="closeTestModal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="test-request">
+          <h4>Request</h4>
+          <div class="test-info">
+            <span class="method-badge" id="testMethod">GET</span>
+            <span class="test-url" id="testUrl"></span>
+          </div>
+          <div class="form-group" id="testBodyGroup" style="display:none;margin-top:12px;">
+            <label for="testRequestBody">Request Body</label>
+            <textarea id="testRequestBody" rows="4" placeholder='{"key": "value"}'></textarea>
+          </div>
+          <button class="btn btn-primary" id="sendTestBtn" style="margin-top:12px;">Send Request</button>
+        </div>
+        <div class="test-loading" id="testLoading" style="display:none;">
+          <div class="spinner"></div>
+          <p>Sending request...</p>
+        </div>
+        <div class="test-response" id="testResponse" style="display:none;">
+          <h4>Response</h4>
+          <div class="test-status">
+            <span>Status: </span>
+            <span class="status-badge" id="testStatusBadge"></span>
+            <span class="test-time" id="testTime"></span>
+          </div>
+          <div class="test-headers">
+            <h5>Response Headers</h5>
+            <pre id="testResponseHeaders"></pre>
+          </div>
+          <div class="test-body-result">
+            <h5>Response Body</h5>
+            <pre id="testResponseBody"></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Log Detail Modal -->
+  <div class="modal-overlay" id="logDetailModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h3>Request Log Details</h3>
+        <button class="modal-close" id="closeLogModal">✕</button>
+      </div>
+      <div class="modal-body" id="logDetailContent"></div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
