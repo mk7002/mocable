@@ -1,0 +1,140 @@
+{
+  "mocks": [
+    {
+      "name": "Get Users",
+      "method": "GET",
+      "path": "/users",
+      "statusCode": 200,
+      "responseType": "JSON",
+      "responseBody": "{\"users\":[{\"id\":1,\"name\":\"Milind\"}]}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "enabled": true,
+      "delay": 0,
+      "id": "mqcuct6vcz0j9x8i",
+      "createdAt": "2026-06-13T21:02:11.146Z"
+    },
+    {
+      "name": "Get User by ID",
+      "method": "GET",
+      "path": "/users/:id",
+      "statusCode": 200,
+      "responseType": "JSON",
+      "responseBody": "{\"id\":\"{{id}}\",\"name\":\"Milind\",\"timestamp\":\"{{timestamp}}\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "enabled": true,
+      "delay": 0,
+      "id": "mqcudjfldn3e8s66",
+      "createdAt": "2026-06-13T21:02:45.153Z"
+    }
+  ],
+  "requestLogs": [
+    {
+      "method": "GET",
+      "path": "/users",
+      "headers": {
+        "host": "localhost:3000",
+        "connection": "keep-alive",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+        "sec-fetch-site": "none",
+        "sec-fetch-mode": "navigate",
+        "sec-fetch-user": "?1",
+        "sec-fetch-dest": "document",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7"
+      },
+      "query": {},
+      "requestBody": {},
+      "responseStatus": 200,
+      "id": "mqcud4lchdttpfzi",
+      "timestamp": "2026-06-13T21:02:25.920Z"
+    },
+    {
+      "method": "GET",
+      "path": "/users",
+      "headers": {
+        "host": "localhost:3000",
+        "user-agent": "curl/8.7.1",
+        "accept": "*/*"
+      },
+      "query": {},
+      "requestBody": {},
+      "responseStatus": 200,
+      "id": "mqcud6w61h1hfemm",
+      "timestamp": "2026-06-13T21:02:28.902Z"
+    },
+    {
+      "method": "GET",
+      "path": "/",
+      "headers": {
+        "host": "localhost:3000",
+        "connection": "keep-alive",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+        "sec-fetch-site": "none",
+        "sec-fetch-mode": "navigate",
+        "sec-fetch-user": "?1",
+        "sec-fetch-dest": "document",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7"
+      },
+      "query": {},
+      "requestBody": {},
+      "responseStatus": 404,
+      "id": "mqcud9al36sg5qw5",
+      "timestamp": "2026-06-13T21:02:32.013Z"
+    },
+    {
+      "method": "GET",
+      "path": "/users",
+      "headers": {
+        "host": "localhost:3000",
+        "connection": "keep-alive",
+        "sec-ch-ua": "\"Chromium\";v=\"148\", \"Google Chrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "upgrade-insecure-requests": "1",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+        "sec-fetch-site": "none",
+        "sec-fetch-mode": "navigate",
+        "sec-fetch-user": "?1",
+        "sec-fetch-dest": "document",
+        "accept-encoding": "gzip, deflate, br, zstd",
+        "accept-language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7",
+        "if-none-match": "W/\"24-elXFLQ7Ux8J16rOm8PqTpOfaaOg\""
+      },
+      "query": {},
+      "requestBody": {},
+      "responseStatus": 200,
+      "id": "mqcudh4s4aeaw90w",
+      "timestamp": "2026-06-13T21:02:42.172Z"
+    },
+    {
+      "method": "GET",
+      "path": "/users/42",
+      "headers": {
+        "host": "localhost:3000",
+        "user-agent": "curl/8.7.1",
+        "accept": "*/*"
+      },
+      "query": {},
+      "requestBody": {},
+      "responseStatus": 200,
+      "id": "mqcudp1dsob1p42p",
+      "timestamp": "2026-06-13T21:02:52.417Z"
+    }
+  ]
+}
